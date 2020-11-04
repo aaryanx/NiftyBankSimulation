@@ -1,4 +1,4 @@
-df<- read.csv("d:/Projects/MonteCarlo/BankNifty.csv", 1)
+df<- read.csv("d:/Git/NiftyBankSimulation/BankNifty.csv", 1)
 
 df2<-data.frame("Date"=df['Date'], "Price"=df['Close'])
 for(i in 2:nrow(df))
@@ -22,11 +22,11 @@ for(i in 1:paths)
   {
     price[j,i]<-price[j-1,i]*exp((u-(v/2))+std*qnorm(runif(1, 0, 1)))
   }
-  risk[i]=quantile(price[,i], 0.95)
+  risk[i]=quantile(price[,i], 0.05)
 }
 estrisk<-mean(risk)
-histrisk<-as.numeric(quantile(df[,5], 0.95))
+histrisk<-as.numeric(quantile(df[,5], 0.05))
 vrisk<-0.4*estrisk+0.6*histrisk
-print('Value at Risk=')
+print('Lowest value of NiftyBank in next 30 days=')
 print(vrisk)
 matplot(price, main="Nifty Bank Simulation", xlab="Day", ylab="Price",type="l")
